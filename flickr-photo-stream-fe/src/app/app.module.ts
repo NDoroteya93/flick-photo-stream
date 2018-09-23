@@ -1,7 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Modules
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutModule } from './modules/layout/layout.module';
+import { UsersModule } from './modules/users/users.module';
+import { FlickrModule } from './modules/flickr/flickr.module';
+
+// Components
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,7 +16,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    UsersModule,
+    FlickrModule
   ],
   providers: [],
   bootstrap: [AppComponent]
