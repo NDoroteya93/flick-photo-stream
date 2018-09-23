@@ -1,0 +1,17 @@
+{
+    "extends": "../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "fps",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "fps",
+            "kebab-case"
+        ]
+    }
+}
