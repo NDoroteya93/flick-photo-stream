@@ -1,0 +1,17 @@
+.portfolio-item { 
+  margin-bottom: 20px;
+  .card { 
+    width: 200px; 
+    height: 150px;
+    a { 
+      height: 200px;
+      padding: 10px;  
+    }
+    .card-title {
+      font-size: 14px; 
+      a {
+        padding: 0;
+      }
+    }
+  }
+}

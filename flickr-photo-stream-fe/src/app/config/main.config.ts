@@ -1,13 +1,16 @@
 import { environment } from '../../environments/environment';
 
 const BASE_CONFIG: any = {
-  apiEndPoint: '/api/',
+  apiEndPoint: 'api/',
+  photostreamEndPoint: 'api/photostreams',
+  authenticateEndPoint: 'api/authenticate', 
+  createUserEndPoint: 'api/users'
 };
 
 const configsMap: any = {
   'dev': {
     ...BASE_CONFIG,
-    baseUrl: 'https://localhost:3000'
+    baseUrl: 'http://localhost:3000'
 
   },
   'prod': {

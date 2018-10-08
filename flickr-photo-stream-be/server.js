@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const csrf = require('csrf');
+const csrf = require('csurf');
 const jwt = require('jsonwebtoken');
 const jwtDecode = require('jwt-decode');
 
@@ -13,6 +13,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 /**
  * @name Cross-Origin Resourse Sharing
  * @param  {} cors(
@@ -80,12 +81,28 @@ const makeCsrToken = (req, res, next) => {
   next();
 };
 
-// TODO add Routes here!!
+// User routes
+app.use('/api/users', require('./api/users'));
+
+// Auth routes
+app.use('/api/authenticate', require('./api/authenticate'));
+
+// app.use(csrf({ cookie: true }));
+// app.use(makeCsrToken);
+// app.use(attachUser);
+
+
+// The authenticate middleware is applied before
+// the photostream endpoint so that can it be protected
+// app.use(checkJwt);
+
+// Photostream routes
+app.use('/api/photostreams', require('./api/photostreams'));
 
 async function connect() { 
   try { 
     mongoose.Promise = global.Promise;
-    await mongoose.connect(process.env.MLAB_URL, { useNewUrlParser: true });
+    await mongoose.connect('mongodb://localhost:27017/flickr-photo-stream' || process.env.MLAB_URL, { useNewUrlParser: true });
     await console.log('connected to db');
   } catch (err) { 
     console.log('Mongoose error', err);

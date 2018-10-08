@@ -1,0 +1,20 @@
+$card-column-sizes: (
+    xs: 2,
+    sm: 3,
+    md: 4,
+    lg: 5,
+);
+
+@each $breakpoint-size, $column-count in $card-column-sizes {
+    @include media-breakpoint-up($breakpoint-size) {
+      .card-columns {
+        column-count: $column-count;
+        column-gap: 1.25rem;
+
+        .card {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+}

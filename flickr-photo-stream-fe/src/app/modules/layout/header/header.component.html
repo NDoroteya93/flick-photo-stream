@@ -1,3 +1,37 @@
-<p>
-  header works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="active">Flickr</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" [routerLink]="['/']" routerLinkActive="active">
+            <a class="nav-link">About</a>
+          </li>
+          <li class="nav-item" [routerLink]="['/users']" routerLinkActive="active">
+            <a class="nav-link">Users</a>
+          </li>
+          <li class="nav-item" [routerLink]="['/photostream']" routerLinkActive="active">
+            <a class="nav-link">Photostream</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navbar-end">
+        <a class="navbar-item" routerLink="login" *ngIf="!authService.isAuthenticated()">
+          <i class="fa fa-sign-in"></i>
+          <span class="has-icon-left">Log In</span>
+        </a>
+        <a class="navbar-item" (click)="logout()" *ngIf="authService.isAuthenticated()">
+          <i class="fa fa-sign-out"></i>
+          <span class="has-icon-left">Log Out</span>
+        </a>
+      </div>
+    </div>
+  </nav>
