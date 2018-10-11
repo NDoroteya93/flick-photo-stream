@@ -102,7 +102,7 @@ app.use('/api/photostreams', require('./api/photostreams'));
 async function connect() { 
   try { 
     mongoose.Promise = global.Promise;
-    await mongoose.connect('mongodb://localhost:27017/flickr-photo-stream' || process.env.MLAB_URL, { useNewUrlParser: true });
+    await mongoose.connect(process.env.MLAB_URL, { useNewUrlParser: true });
     await console.log('connected to db');
   } catch (err) { 
     console.log('Mongoose error', err);

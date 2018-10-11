@@ -31,16 +31,28 @@ const createPhotostream = async (photostreamData, author='dory') => {
 
 const deletePhotostream = async (id) => {
   try {
-    return await Exoplanet.findOneAndRemove({ _id: id });
+    return await Photostream.findOneAndRemove({ _id: id });
   } catch (err) {
     console.log(err);
     return err;
   }
 };
 
+const getPhotostreamByTag = async (term) => { 
+  try {
+    const regex = new RegExp(`.*${term}.*`, 'i');
+    console.log(regex);
+    return await Photostream.find({ tags: new RegExp(`.*${term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}.*`, 'i') });
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
 module.exports = {
   getPhotostreams,
   getPhotostream,
   createPhotostream,
-  deletePhotostream
+  deletePhotostream, 
+  getPhotostreamByTag
 };

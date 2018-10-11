@@ -6,6 +6,7 @@ const getPhotostreams = async (req, res) => {
     const photostreams = await queries.getPhotostreams();
     res.json({ result: photostreams });
   } catch (err) {
+    console.log(err);
     return err;
   }
 };
@@ -46,9 +47,23 @@ const deletePhotostream = async (req, res) => {
   }
 };
 
+const getPhotostreamByTag = async (req, res) => { 
+  try {
+
+    if (req.query.tags) {
+      const result = await queries.getPhotostreamByTag(term);
+      res.json({ result });
+    } 
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
 module.exports = {
   getPhotostreams,
   getPhotostream,
   postPhotostream,
-  deletePhotostream
+  deletePhotostream, 
+  getPhotostreamByTag
 };

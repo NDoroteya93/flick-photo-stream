@@ -13,4 +13,4 @@ const photostreamModel = new Schema({
   tags: { type: String, required: false }
 });
 
-module.exports = mongoose.model('photostream', photostreamModel);
+module.exports = mongoose.model('photostreams', photostreamModel);

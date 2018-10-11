@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { HttpClient, HttpRequest, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -21,8 +21,8 @@ export class HttpService {
    * @returns {Observable<any>}
    * @memberof HttpService
    */
-  public get(url: string): Observable<any> {
-    return this.request('GET', url);
+  public get(url: string, params?: HttpParams): Observable<any> {
+    return this.request('GET', url, null, params);
   }
 
   /**
@@ -87,9 +87,10 @@ export class HttpService {
    * @returns {Observable<any>}
    * @memberof HttpService
    */
-  private request(method: string, url: string, payload?: any): Observable<any> {
-    const request = new HttpRequest(method, this.constructURL(url), payload);
-
+  private request(method: string, url: string, payload?: any, params?: HttpParams): Observable<any> {
+    const request = new HttpRequest(method, this.constructURL(url), payload, { params } );
+     console.log('REQUEST', request);
+     console.log('params', params);
     return this.httpClient
       .request(request)
       .pipe(

@@ -1,21 +1,47 @@
+<!-- SEARCH FIELD -->
 <h1 class="fps-header">Photostream</h1>
+
+<div class="row justify-content-left">
+  <div class="col-12 col-md-10 col-lg-8 p-4">
+    <form class="card card-sm">
+      <div class="card-body row no-gutters align-items-center p-1">
+          <div class="col-auto p-2">
+              <i class="fa fa-search h2 text-body"></i>
+          </div>
+          <div class="col">
+              <input class="form-control form-control-sm form-control-borderless" type="search" placeholder="Search tags"
+                (input)="searchByTagName($event.target.value);"
+              >
+          </div>
+          <div class="col-auto">
+              <button class="btn btn-sm btn-success" type="submit">Search</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CONTENT -->
 <div class="row" *ngIf="photoStreamList && photoStreamList.length > 0">
   <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item" *ngFor="let photostream of photoStreamList">
-    <div class="card h-100 w-100">
+    <div class="card h-100 w-100 shadow mb-5 bg-white rounded">
       <a [href]="photostream.link" target="_blank" *ngIf="photostream.media && photostream.media.m">
         <img class="card-img-top h-100 w-100" [src]="photostream.media.m" [alt]="photostream.title">
       </a>
       <img *ngIf="!photostream.media && !photostream.media.m" src="./assets/images/default-img.png" class="card-img-top h-100 w-100">
       <div class="card-body">
         <h4 class="card-title">
-          <a [href]="photostream.link" target="_blank">{{ photostream.title }}</a>
+          <a *ngIf="photostream.title.trim().length > 0" [href]="photostream.link" target="_blank">{{ photostream.title }}</a>
+          <a *ngIf="photostream.title.trim().length < 2">No Title</a>
           <span> by </span>
           <a [href]="photostream.author.split(' ')[0]" target="_blank">{{ getAuthorName(photostream.author.split(' ')[1]) }}</a>
         </h4>
         <!-- DESCRIPTION -->
-        <p class="card-text" [innerHTML]="photostream.description | safe: 'html'"></p>
+        <div class="card-text">Description: 
+          <div *ngFor="let description of getPhotostreamDescription(photostream.description)" [innerHTML]="description  | safe: 'html'"></div>
+        </div>
         <!-- TAGS -->
-        <p class="card-text" *ngIf="photostream.tags && photostream.tags.length">Tags: 
+        <p class="card-text align-self-end" *ngIf="photostream.tags && photostream.tags.length">Tags: 
           <span *ngFor="let tag of photostream.tags.split(' ')" class="badge badge-secondary m-1 p-1">{{ tag }} </span>
         </p>
       </div>

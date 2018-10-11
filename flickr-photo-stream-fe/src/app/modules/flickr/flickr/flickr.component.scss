@@ -1,8 +1,6 @@
 .portfolio-item { 
   margin-bottom: 20px;
   .card { 
-    width: 200px; 
-    height: 150px;
     a { 
       height: 200px;
       padding: 10px;  
@@ -13,5 +11,33 @@
         padding: 0;
       }
     }
+
+    .card-text {
+      div {
+        font-size: 14px;  
+        white-space: nowrap;
+        overflow: hidden;
+        o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+      }
+      a {
+        height: auto;
+        padding: 0; 
+      }
+      img {
+         display: none;
+      }
+    }
   }
+}
+
+.form-control-borderless {
+    border: none;
+    &:hover,
+    &:active,
+    &:focus { 
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
 }
